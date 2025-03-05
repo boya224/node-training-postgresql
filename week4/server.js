@@ -6,7 +6,7 @@ function isUndefined (value) {
   return value === undefined
 }
 
-function isNotValidSting (value) {
+function isNotValidString (value) {
   return typeof value !== "string" || value.trim().length === 0 || value === ""
 }
 
@@ -49,7 +49,7 @@ const requestListener = async (req, res) => {
     req.on("end", async () => {
       try {
         const data = JSON.parse(body)
-        if (isUndefined(data.name) || isNotValidSting(data.name) ||
+        if (isUndefined(data.name) || isNotValidString(data.name) ||
                 isUndefined(data.credit_amount) || isNotValidInteger(data.credit_amount) ||
                 isUndefined(data.price) || isNotValidInteger(data.price)) {
           res.writeHead(400, headers)
@@ -100,7 +100,7 @@ const requestListener = async (req, res) => {
   } else if (req.url.startsWith("/api/credit-package/") && req.method === "DELETE") {
     try {
       const packageId = req.url.split("/").pop()
-      if (isUndefined(packageId) || isNotValidSting(packageId)) {
+      if (isUndefined(packageId) || isNotValidString(packageId)) {
         res.writeHead(400, headers)
         res.write(JSON.stringify({
           status: "failed",
@@ -156,7 +156,7 @@ const requestListener = async (req, res) => {
     req.on("end", async () => {
       try{
         const data = JSON.parse(body);
-        if(isUndefined(data.name) || isNotValidSting(data.name)) {
+        if(isUndefined(data.name) || isNotValidString(data.name)) {
           res.writeHead(400, headers)
           res.write(JSON.stringify({
             status: "failed",
